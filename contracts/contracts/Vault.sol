@@ -2,7 +2,22 @@
 pragma solidity ^0.8.0;
 
 contract Vault {
-   
+    address private owner;
+    address public router;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    function setRouter(address _router) public onlyOwner {
+        router = _router;
+    }
+
     struct creditOffer {
         address lender;
         address borrower;
@@ -19,13 +34,5 @@ contract Vault {
 
     function addOffer(creditOffer memory _offer) public {
         loans.push(_offer);
-    }
-
-    function clearGarbage() public {
-        for (uint256 i = 0; i < loans.length; i++) {
-            if (loans[i].signed == false && loans[i].genesisTime + 30 days < block.timestamp) {
-                delete loans[i];
-            }
-        }
     }
 }
