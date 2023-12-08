@@ -1,17 +1,21 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-contract router {
-address public owner;
-address public gov;
-mapping(address => bool) public users;
-mapping(address => bool) public lenders;
+interface IVault {}
 
-    constructor() {
+contract router {
+    address public owner;
+    address public gov;
+    mapping(address => bool) public users;
+    mapping(address => bool) public lenders;
+    IVault vault;
+
+    constructor(address _vault) {
+        vault = IVault(_vault);
         owner = msg.sender;
     }
 
- modifier onlyOwner() {
+    modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
@@ -36,31 +40,23 @@ mapping(address => bool) public lenders;
         lenders[_lender] = false;
     }
 
-    function setGov (address _gov) public onlyOwner {
+    function setGov(address _gov) public onlyOwner {
         gov = _gov;
     }
 
-    function createCreditOffer () public {
+    function createCreditOffer() public {
         // create credit Offer and send to main contract for storage
     }
 
-    function acceptCreditOffer () public {
-        // accept credit Offer and send to main contract for storage and signing
-    }
-
-    function signCreditOffer () public {
+    function signCreditOffer() public {
         // sign credit Offer and send to main contract for storage
     }
 
-    function payDues () public {
-        // pay dues and send to main contract 
+    function payDues() public {
+        // pay dues and send to main contract
     }
 
-    function payMerchant () public {
-        // create bill and send to main contract 
+    function payMerchant() public {
+        // create bill and send to main contract
     }
-
-
-
-
 }
