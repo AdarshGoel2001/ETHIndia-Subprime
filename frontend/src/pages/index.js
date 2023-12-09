@@ -19,12 +19,10 @@ export default function Home() {
       <div className="min-h-[80vh] mb-8 flex items-center px-20 md:px-12 mds:px-8 sm:px-4">
         <div className=" w-[50%] mt-20 mds:w-[80%] sm:w-full">
           <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] font-bold text-white">
-            Get access to the best crypto asset managers in the world
+            Non-Collateralized Loans with Secure, ZKP-Powered Credit Checks.
           </div>
           <div className="text-[#989898] text-[20px] mds:text-[16px] sm:text-[14px] mt-4 w-[90%]">
-            Valio makes professional crypto asset management available for
-            everyone. Deposit and withdraw at any time, no lockups! Get started
-            in 2 minutes or less with as little as 50$.
+            Effortless. Transparent. Trustworthy.
           </div>
           <div className="flex mt-8 gap-8 xs:block xs:space-y-4">
             {/* <div

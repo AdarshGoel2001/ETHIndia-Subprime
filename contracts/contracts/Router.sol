@@ -1,19 +1,14 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-interface IVault {
-    function getAllRequests() external view returns (IVault.Request[] memory);
-}
+import "./Vault.sol";
 
 contract router {
     address private owner;
-    address private gov;
-    mapping(address => bool) public users;
-    mapping(address => bool) public lenders;
-    IVault vault;
+    Vault vault;
 
     constructor(address _vault) {
-        vault = IVault(_vault);
+        vault = Vault(_vault);
         owner = msg.sender;
     }
 
@@ -26,35 +21,53 @@ contract router {
         owner = _owner;
     }
 
-    function labelUsers(address _user, bool value) public onlyOwner {
-        users[_user] = value;
+    function createRequest(
+        uint256 _amount,
+        uint256 _interest,
+        uint256 _duration
+    ) external {
+        vault.createRequest(msg.sender, _amount, _interest, _duration);
     }
 
-    function labelLenders(address _lender, bool value) public onlyOwner {
-        lenders[_lender] = value;
-    }
-
-    function setGov(address _gov) public onlyOwner {
-        gov = _gov;
-    }
-
-    function getAllRequests() public view returns (IVault.Request[] memory) {
+    function getAllRequests() external view returns (Vault.Request[] memory) {
         return vault.getAllRequests();
     }
 
-    function createCreditOffer() public {
-        // create credit Offer and send to main contract for storage
+    function getNotNullLenderRequests(
+        address _lender
+    ) external view returns (Vault.Request[] memory) {
+        return vault.getNotNullLenderRequests(_lender);
     }
 
-    function signCreditOffer() public {
-        // sign credit Offer and send to main contract for storage
+    function removeBorrowerFromRequest(uint256 id) external {
+        vault.removeBorrowerFromRequest(msg.sender, id);
     }
 
-    function payDues() public {
-        // pay dues and send to main contract
+    function addBorrowerToRequest(uint256 id, address _borrower) external {
+        vault.addBorrowerToRequest(msg.sender, id, _borrower);
     }
 
-    function payMerchant() public {
-        // create bill and send to main contract
+    function convertRequestToOffer(uint256 id) external {
+        vault.convertRequestToOffer(msg.sender, id);
+    }
+
+    function payDues(uint256 id) external {
+        vault.payDues(msg.sender, id);
+    }
+
+    function checkForDefaulters() external returns (Vault.Request[] memory) {
+        return vault.checkForDefaulters(msg.sender);
+    }
+
+    function getAllDefaulterAddress() external view returns (address[] memory) {
+        return vault.getAllDefaulterAddress();
+    }
+
+    function getBorrowerRequest()
+        external
+        view
+        returns (Vault.Request[] memory)
+    {
+        return vault.getBorrowerRequest(msg.sender);
     }
 }
