@@ -49,9 +49,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider 
-        chains={chains} 
-        coolMode 
+      <RainbowKitProvider
+        chains={chains}
+        coolMode
         showRecentTransactions={false}
         theme={lightTheme({
           // accentColor: '#FF007A',
@@ -62,7 +62,9 @@ const MyApp = ({ Component, pageProps }) => {
         })}
         modalSize="compact"
       >
-        {isMounted && <Component {...pageProps} />}
+        <div className="min-h-screen bg-gradient">
+          {isMounted && <Component {...pageProps} />}
+        </div>
       </RainbowKitProvider>
     </WagmiConfig>
   );
