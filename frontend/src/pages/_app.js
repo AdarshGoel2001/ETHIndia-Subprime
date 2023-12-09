@@ -4,6 +4,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { sepolia } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { getDefaultWallets, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { LightNodeProvider } from "@waku/react";
 import {
   injectedWallet,
   metaMaskWallet,
@@ -23,6 +24,9 @@ const MyApp = ({ Component, pageProps }) => {
     setIsMounted(true);
   }, []);
 
+  // Set the Light Node options
+  const NODE_OPTIONS = { defaultBootstrap: true };
+
   const { chains, publicClient } = configureChains(
     [sepolia],
     [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? '' })]
@@ -36,7 +40,7 @@ const MyApp = ({ Component, pageProps }) => {
         metaMaskWallet({ projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? '', chains }),
         rainbowWallet({ projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? '', chains }),
         walletConnectWallet({ projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? '', chains }),
-        coinbaseWallet({ appName: 'Pink Lotus DAO', chains }),
+        coinbaseWallet({ appName: '', chains }),
       ],
     },
   ]);
@@ -62,9 +66,11 @@ const MyApp = ({ Component, pageProps }) => {
         })}
         modalSize="compact"
       >
-        <div className="min-h-screen bg-gradient">
-          {isMounted && <Component {...pageProps} />}
-        </div>
+        <LightNodeProvider options={NODE_OPTIONS}>
+          <div className="min-h-screen bg-gradient">
+            {isMounted && <Component {...pageProps} />}
+          </div>
+        </LightNodeProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
