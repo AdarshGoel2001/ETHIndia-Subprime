@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-interface IVault {}
+interface IVault {
+    function getAllRequests() external view returns (IVault.Request[] memory);
+}
 
 contract router {
     address private owner;
@@ -34,6 +36,10 @@ contract router {
 
     function setGov(address _gov) public onlyOwner {
         gov = _gov;
+    }
+
+    function getAllRequests() public view returns (IVault.Request[] memory) {
+        return vault.getAllRequests();
     }
 
     function createCreditOffer() public {

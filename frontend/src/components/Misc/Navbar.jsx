@@ -7,6 +7,7 @@ import { MdMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { Modal } from "..";
 import { useRouter } from "next/router";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -25,12 +26,67 @@ const Navbar = () => {
           onClick={handleHome}
           className="h-28 cursor-pointer w-40 md:h-24 md:w-36 mds:h-20 mds:w-28"
         />
-        <div
+        <ConnectButton.Custom>
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openChainModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            // Note: If your app doesn't use authentication, you
+            // can remove all 'authenticationStatus' checks
+            const ready = mounted && authenticationStatus !== 'loading';
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === 'authenticated');
+            return (
+              <div
+                {...(!ready && {
+                  'aria-hidden': true,
+                  'style': {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                  },
+                })}
+              >
+                {(() => {
+                  if (!connected) {
+                    return (
+                      <button onClick={openConnectModal} type="button">
+                        Connect Wallet
+                      </button>
+                    );
+                  }
+                  if (chain.unsupported) {
+                    return (
+                      <button onClick={openChainModal} type="button">
+                        Wrong network
+                      </button>
+                    );
+                  }
+                  return (
+                    <button type="button">
+                        Open App
+                    </button>
+                  );
+                })()}
+              </div>
+            );
+          }}
+        </ConnectButton.Custom>
+        {/* <div
           onClick={() => setModal(!modal)}
           className="text-white border border-[#676767] hover:border-white cursor-pointer py-2 px-4 rounded-lg xs:hidden"
         >
           Open App
-        </div>
+        </div> */}
         <div className="hidden xs:block">
           {navbarOpen ? (
             <div>
