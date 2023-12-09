@@ -129,7 +129,6 @@ contract Vault {
 
     function createRequest(
         address _lender,
-        address _borrower,
         uint256 _amount,
         uint256 _interest,
         uint256 _duration
@@ -137,7 +136,7 @@ contract Vault {
         Request memory request = Request(
             requestIdx[_lender],
             _lender,
-            _borrower,
+            address(0),
             _amount,
             _interest,
             _duration,
