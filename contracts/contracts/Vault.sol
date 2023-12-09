@@ -244,33 +244,34 @@ contract Vault {
     }
 
     function payDues(address _lender, uint256 id) external onlyRouter {
+        Request memory request = requests[getRequestKey(_lender, id)];
+
         if (
-            IERC20(USDC).balanceOf(
-                requests[getRequestKey(_lender, id)].borrower
-            ) < requests[getRequestKey(_lender, id)].amount
+            IERC20(USDC).balanceOf(request.borrower) <
+            request.amount * (1 + request.interest / 100)
         ) {
-            revert("Insufficient balance with borrower for  USDC.");
+            revert("Insufficient balance with borrower for USDC.");
         }
 
         if (
             IERC20(USDC).allowance(msg.sender, address(this)) <
-            requests[getRequestKey(_lender, id)].amount
+            request.amount * (1 + request.interest / 100)
         ) {
             IERC20(USDC).approve(
-                requests[getRequestKey(_lender, id)].borrower,
-                requests[getRequestKey(_lender, id)].amount
+                request.borrower,
+                request.amount * (1 + request.interest / 100)
             );
         }
 
         IERC20(USDC).transferFrom(
-            requests[getRequestKey(_lender, id)].borrower,
-            requests[getRequestKey(_lender, id)].lender,
-            requests[getRequestKey(_lender, id)].amount
+            request.borrower,
+            request.lender,
+            request.amount * (1 + request.interest / 100)
         );
 
-        requests[getRequestKey(_lender, id)].amountRepaid += requests[
-            getRequestKey(_lender, id)
-        ].amount;
+        requests[getRequestKey(_lender, id)].amountRepaid +=
+            requests[getRequestKey(_lender, id)].amount *
+            (1 + request.interest / 100);
     }
 
     function checkForDefaulters(
@@ -285,7 +286,10 @@ contract Vault {
                     requests[getRequestKey(_lender, id)].genesisTime +
                         requests[getRequestKey(_lender, id)].duration) &&
                 (requests[getRequestKey(_lender, id)].amountRepaid <
-                    requests[getRequestKey(_lender, id)].amount)
+                    requests[getRequestKey(_lender, id)].amount *
+                        (1 +
+                            requests[getRequestKey(_lender, id)].interest /
+                            100))
             ) {
                 requests[getRequestKey(_lender, id)].defaulted = true;
                 publishInfo[
@@ -320,6 +324,27 @@ contract Vault {
             mstore(_addresses, validAddressesCount)
         }
         return _addresses;
+    }
+
+    function getBorrowerRequest(
+        address _borrow
+    ) external view onlyRouter returns (Request[] memory) {
+        Request[] memory _requests = new Request[](arrayOfRequests.length);
+        uint256 validRequestsCount = 0;
+
+        for (uint256 i = 0; i < arrayOfRequests.length; i++) {
+            Request memory request = requests[arrayOfRequests[i]];
+            if (request.borrower == _borrow) {
+                _requests[validRequestsCount] = request;
+                validRequestsCount++;
+            }
+        }
+
+        // Resize the array to remove unused slots
+        assembly {
+            mstore(_requests, validRequestsCount)
+        }
+        return _requests;
     }
 
     function getRequestKey(
