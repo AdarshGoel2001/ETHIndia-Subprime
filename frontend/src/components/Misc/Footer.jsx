@@ -1,6 +1,6 @@
 import Image from "next/image";
-import logo from '../../public/logo.png'
-
+import logo from "../../../public/logo.png";
+import { useState } from "react";
 
 const FooterLinks = ({ heading, items }) => (
   <div className="flex-1 justify-start items-start">
@@ -19,6 +19,11 @@ const FooterLinks = ({ heading, items }) => (
 );
 
 const Footer = () => {
+  const [emailData, setEmailData] = useState("");
+
+  const handleEmail = () => {
+    setEmailData("");
+  };
 
   return (
     <footer className="flex justify-center items-center flex-col border-t sm:py-8 py-16">
@@ -40,11 +45,16 @@ const Footer = () => {
           <div className="flex justify-between items-center md:w-full minlg:w-557 w-357 mt-6 border rounded-md">
             <input
               type="email"
+              onChange={(e) => setEmailData(e.target.value)}
+              value={emailData}
               placeholder="Your Email"
-              className="h-full flex-1 w-full bg-transparent px-4 rounded-md font-normal text-xs minlg:text-bg outline-none"
+              className="h-full text-white flex-1 w-full bg-transparent px-4 rounded-md font-normal text-xs minlg:text-bg outline-none"
             />
             <div className="flex-initial">
-              <div className="border text-sm minlg:text-lg py-2 px-6 sm:px-2 minlg:px-8 font-poppins font-semibold text-white cursor-pointer">
+              <div
+                onClick={handleEmail}
+                className="border text-sm minlg:text-lg py-2 px-6 sm:px-2 minlg:px-8 font-poppins font-semibold text-white cursor-pointer"
+              >
                 Email Me
               </div>
             </div>

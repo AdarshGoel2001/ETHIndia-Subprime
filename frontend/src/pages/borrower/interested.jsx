@@ -1,10 +1,6 @@
-import { BorrowerNav } from "@/components";
+import { BorrowerNav, InterestedReqCard } from "@/components";
 
-const {
-  default: InvestorDetailCard,
-} = require("@/components/Card/InvestorDetailCard");
-
-const BorrowerHome = () => {
+const Interested = () => {
   const data = [
     {
       id: 123,
@@ -38,12 +34,12 @@ const BorrowerHome = () => {
     <div>
       <BorrowerNav />
       <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] xs:text-[24px] font-bold text-white text-center pt-10">
-        Lenders Requests
+        Interested Lenders Requests
       </div>
       <div className="mt-10 px-10 sm:px-4 space-y-4">
         {data.map((item, key) => (
           <div key={key}>
-            <InvestorDetailCard item={item} />
+            <InterestedReqCard item={item} />
           </div>
         ))}
       </div>
@@ -51,4 +47,4 @@ const BorrowerHome = () => {
   );
 };
 
-export default BorrowerHome;
+export default Interested;
