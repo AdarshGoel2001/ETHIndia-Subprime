@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 interface IVault {}
 
 contract router {
-    address public owner;
-    address public gov;
+    address private owner;
+    address private gov;
     mapping(address => bool) public users;
     mapping(address => bool) public lenders;
     IVault vault;
@@ -24,20 +24,12 @@ contract router {
         owner = _owner;
     }
 
-    function whitelistUsers(address _user) public onlyOwner {
-        users[_user] = true;
+    function labelUsers(address _user, bool value) public onlyOwner {
+        users[_user] = value;
     }
 
-    function whitelistLenders(address _lender) public onlyOwner {
-        lenders[_lender] = true;
-    }
-
-    function removeUsers(address _user) public onlyOwner {
-        users[_user] = false;
-    }
-
-    function removeLenders(address _lender) public onlyOwner {
-        lenders[_lender] = false;
+    function labelLenders(address _lender, bool value) public onlyOwner {
+        lenders[_lender] = value;
     }
 
     function setGov(address _gov) public onlyOwner {
