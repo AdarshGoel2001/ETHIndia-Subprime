@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../../public/logo.png'
 import { MdMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -24,6 +24,21 @@ const BorrowerNav = () => {
      const handlePay = () => {
       router.push('/borrower/pay')
      }
+
+     
+   useEffect(() => {
+     // Add and remove the 'overflow-hidden' class based on the navbar state
+     if (navbarOpen) {
+       document.body.classList.add("overflow-hidden");
+     } else {
+       document.body.classList.remove("overflow-hidden");
+     }
+
+     // Cleanup function to remove the class when the component unmounts or the state changes
+     return () => {
+       document.body.classList.remove("overflow-hidden");
+     };
+   }, [navbarOpen]);
   return (
     <>
       <div className="text-white flex items-center h-[10vh] justify-between px-10 md:px-6 mds:pl-0 xs:pr-4">
@@ -33,7 +48,7 @@ const BorrowerNav = () => {
           onClick={handleHome}
           className="h-28 cursor-pointer w-40 md:h-24 md:w-36 mds:h-20 mds:w-28"
         />
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-4 mds:space-x-0 items-center sm:hidden">
           <div
             onClick={handleBorrow}
             className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
@@ -53,7 +68,7 @@ const BorrowerNav = () => {
             Due Pays
           </div>
         </div>
-        <div className="hidden xs:block">
+        <div className="hidden sm:block">
           {navbarOpen ? (
             <div>
               <RxCross2
@@ -74,7 +89,7 @@ const BorrowerNav = () => {
         </div>
       </div>
       {navbarOpen && (
-        <div className="h-[90vh] flex items-start py-4">
+        <div className="h-[100vh] flex flex-col items-start py-4">
           <div
             onClick={handleBorrow}
             className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"

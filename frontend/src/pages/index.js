@@ -27,7 +27,7 @@ export default function Home() {
             in 2 minutes or less with as little as 50$.
           </div>
           <div className="flex mt-8 gap-8 xs:block xs:space-y-4">
-            <div
+            {/* <div
               onClick={handleLender}
               className="text-white border border-[#676767] hover:border-white py-3 px-5 rounded-lg cursor-pointer text-center"
             >
@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <div onClick={handleBorrower} className="text-white border border-[#676767] hover:border-white py-3 px-5 rounded-lg cursor-pointer text-center">
               Be a Borrower
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="w-[50%] justify-center items-center flex mds:hidden z-10">
@@ -43,43 +43,46 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="px-20 md:px-12 mds:px-8 sm:px-4 ">
-        <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] font-bold text-white">
-          Unleashing Financial Freedom
-        </div>
-        <div className="w-1/2 md:w-[70%] mds:w-[90%] sm:w-full text-[#989898] text-[20px] mds:text-[16px] sm:text-[14px] mt-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus cumque
-          saepe necessitatibus molestiae. Eius, alias molestias rem, animi sed
-          nam laudantium, magni modi aliquid saepe ducimus placeat facilis
-          excepturi mollitia doloribus voluptate officiis quidem voluptates.
-          Similique repellendus corrupti fuga, ipsam nam eveniet dolores numquam
-          illo animi eum ex amet laborum rem, facere atque nemo, assumenda
-          beatae ipsum suscipit facilis magnam a ducimus adipisci! Vitae, iste
-          voluptate facere nulla voluptatem suscipit? Suscipit voluptate modi
-          animi accusantium impedit eveniet esse aliquid beatae totam nihil,
-          dignissimos non dolorum accusamus, fuga corporis cum corrupti debitis
-          aperiam omnis tempora itaque veniam ea distinctio perspiciatis.
-          Consectetur.
+      <div className="md:flex justify-center items-center px-20 lgm:px-14 md:px-10 mds:px-8 sm:px-4 xs:px-4">
+        <div className=" p-8 md:p-6 sm:p-4 xs:p-4 rounded-xl bg-black/40  w-1/2 md:w-[70%] mds:w-[80%] sm:w-full  border">
+          <div className="text-[40px] md:text-[32px] mds:text-[26px] sm:text-[20px] font-bold text-white">
+            Unleashing Financial Freedom
+          </div>
+          <div className=" text-[#989898] text-[20px] mds:text-[16px] sm:text-[14px] mt-4 text-center">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+            cumque saepe necessitatibus molestiae. Eius, alias molestias rem,
+            animi sed nam laudantium, magni modi aliquid saepe ducimus placeat
+            facilis excepturi mollitia doloribus voluptate officiis quidem
+            voluptates. Similique repellendus corrupti fuga, ipsam nam eveniet
+            dolores numquam illo animi eum ex amet laborum rem, facere atque
+            nemo, assumenda beatae ipsum suscipit facilis magnam a ducimus
+            adipisci! Vitae, iste voluptate facere nulla voluptatem suscipit?
+            Suscipit voluptate modi animi accusantium impedit eveniet esse
+            aliquid beatae totam nihil, dignissimos non dolorum accusamus, fuga
+            corporis cum corrupti debitis aperiam omnis tempora itaque veniam ea
+            distinctio perspiciatis. Consectetur.
+          </div>
         </div>
       </div>
-
-      <div className="px-20 md:px-12 mds:px-8 sm:px-4 flex flex-col justify-end mds:items-start items-end my-10">
-        <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] font-bold text-white">
-          Unleashing Financial Freedom
-        </div>
-        <div className="w-1/2 md:w-[70%] mds:w-[90%] sm:w-full text-[#989898] text-[20px] mds:text-[16px] sm:text-[14px] mt-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus cumque
-          saepe necessitatibus molestiae. Eius, alias molestias rem, animi sed
-          nam laudantium, magni modi aliquid saepe ducimus placeat facilis
-          excepturi mollitia doloribus voluptate officiis quidem voluptates.
-          Similique repellendus corrupti fuga, ipsam nam eveniet dolores numquam
-          illo animi eum ex amet laborum rem, facere atque nemo, assumenda
-          beatae ipsum suscipit facilis magnam a ducimus adipisci! Vitae, iste
-          voluptate facere nulla voluptatem suscipit? Suscipit voluptate modi
-          animi accusantium impedit eveniet esse aliquid beatae totam nihil,
-          dignissimos non dolorum accusamus, fuga corporis cum corrupti debitis
-          aperiam omnis tempora itaque veniam ea distinctio perspiciatis.
-          Consectetur.
+      <div className="flex my-10 justify-end  md:justify-center items-center px-20 lgm:px-14 md:px-10 mds:px-8 sm:px-4 xs:px-4">
+        <div className="p-8 md:p-6 sm:p-4 xs:p-4 rounded-xl bg-black/40  w-1/2 md:w-[70%] mds:w-[80%] sm:w-full  border">
+          <div className="text-[40px] md:text-[32px] mds:text-[26px] sm:text-[20px] font-bold text-white">
+            Unleashing Financial Freedom
+          </div>
+          <div className="text-[#989898] text-[20px] mds:text-[16px] sm:text-[14px] mt-4 text-center">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+            cumque saepe necessitatibus molestiae. Eius, alias molestias rem,
+            animi sed nam laudantium, magni modi aliquid saepe ducimus placeat
+            facilis excepturi mollitia doloribus voluptate officiis quidem
+            voluptates. Similique repellendus corrupti fuga, ipsam nam eveniet
+            dolores numquam illo animi eum ex amet laborum rem, facere atque
+            nemo, assumenda beatae ipsum suscipit facilis magnam a ducimus
+            adipisci! Vitae, iste voluptate facere nulla voluptatem suscipit?
+            Suscipit voluptate modi animi accusantium impedit eveniet esse
+            aliquid beatae totam nihil, dignissimos non dolorum accusamus, fuga
+            corporis cum corrupti debitis aperiam omnis tempora itaque veniam ea
+            distinctio perspiciatis. Consectetur.
+          </div>
         </div>
       </div>
 

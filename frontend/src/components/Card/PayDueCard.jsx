@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-const InterestedReqCard = ({ item }) => {
-
+const PayDueCard = ({ item }) => {
   return (
-    <div className="rounded-lg px-6 xs:px-3 xs:py-3 bg-[#000]/40 py-4 ">
+    <div className="rounded-lg px-6 xs:px-3 xs:py-3 bg-[#000]/40 py-4">
       <div className="flex space-x-2 items-center">
         <div className="text-white text-[20px]">{item.name}</div>
         <div className="text-[#787878]">#{item.id}</div>
       </div>
-      <div className="flex items-start justify-between">
-        <div className="flex ">
+      <div className="flex items-center justify-between flex-wrap gap-4">
+        <div className="space-y-4">
           <div className="flex gap-8 flex-wrap">
             <div className="space-y-2">
               <div className="text-[#787878] text-[20px]">Amount</div>
@@ -31,15 +30,30 @@ const InterestedReqCard = ({ item }) => {
               <div className="text-[#787878] text-[20px]">Emi</div>
               <div className="text-white text-[16px]">{item.emi}</div>
             </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-4 flex-wrap">
+          <div className="flex gap-6">
+            <div className="space-y-2">
+              <div className="text-[#787878] text-[20px]">Total Due</div>
+              <div className="text-white text-[16px]">{item.totalDue}</div>
+            </div>
             <div className="space-y-2">
               <div className="text-[#787878] text-[20px]">Total Due</div>
               <div className="text-white text-[16px]">{item.totalDue}</div>
             </div>
           </div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="text-white cursor-pointer py-2 px-4 border border-[#787878] rounded-lg ">
-            Chat
+          <div className="text-white space-y-2">
+            <div className=" text-[20px] text-[#787878]">Pay</div>
+            <div className="flex items-center gap-4 xs:flex-col">
+              <input
+                type="text"
+                placeholder="Enter Amount"
+                className="bg-transparent border rounded-xl py-1 mds:py-0.5 px-4 outline-none"
+              />
+              <div className="cursor-pointer">Pay</div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,4 +61,4 @@ const InterestedReqCard = ({ item }) => {
   );
 };
 
-export default InterestedReqCard;
+export default PayDueCard;

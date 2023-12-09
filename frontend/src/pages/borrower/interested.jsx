@@ -10,6 +10,7 @@ const Interested = () => {
       duration: 12,
       genesisTime: Date.now(),
       emi: 100,
+      totalDue: 1100,
     },
     {
       id: 123,
@@ -28,6 +29,7 @@ const Interested = () => {
       duration: 12,
       genesisTime: Date.now(),
       emi: 100,
+      totalDue: 1100,
     },
   ];
   return (

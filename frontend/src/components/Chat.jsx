@@ -3,12 +3,13 @@ import { useAccount } from 'wagmi';
 import { useWaku } from "@waku/react";
 import { createEncoder, createDecoder } from "@waku/sdk";
 import protobuf from 'protobufjs';
-import './Chat.css'
+import { useLightPush } from '@waku/react';
 
 function Chat() {
     const { address, isConnected } = useAccount();
     const [inputMessage, setInputMessage] = useState("");
     const [messages, setMessages] = useState([]);
+
 
     // Update the inputMessage state as the user input changes
     const handleInputChange = (e) => {
@@ -23,56 +24,101 @@ function Chat() {
     const encoder = createEncoder({ contentTopic });
     const decoder = createDecoder(contentTopic);
 
-    // Create a message structure using Protobuf
-    const ChatMessage = new protobuf.Type("ChatMessage")
-        .add(new protobuf.Field("timestamp", 1, "uint64"))
-        .add(new protobuf.Field("sender", 2, "string"))
-        .add(new protobuf.Field("recipient", 3, "string"))
-        .add(new protobuf.Field("message", 4, "string"));
+    const { push } = useLightPush({ node, encoder });
 
-    // Send the message using Light Push
+
+   const ChatMessage = new protobuf.Type("ChatMessage")
+     .add(new protobuf.Field("timestamp", 1, "uint64"))
+     .add(new protobuf.Field("sender", 2, "string"))
+     .add(new protobuf.Field("recipient", 3, "string"))
+     .add(new protobuf.Field("message", 4, "string"));
+
+    //   const sendMessage = async () => {
+    //     if (!push || inputMessage.length === 0) return;
+
+    //     // Create a new message object
+    //     const timestamp = Date.now();
+    //     const protoMessage = ChatMessage.create({
+    //       timestamp: timestamp,
+    //       sender: address,
+    //       recipient: "lender address",
+    //       message: inputMessage,
+    //     });
+
+    //     // Serialise the message and push to the network
+    //     const payload = ChatMessage.encode(protoMessage).finish();
+    //     const { recipients, errors } = await push({ payload, timestamp });
+
+    //     // Check for errors
+    //     if (errors.length === 0) {
+    //       setInputMessage("");
+    //       console.log("MESSAGE PUSHED");
+    //     } else {
+    //       console.log(errors);
+    //     }
+    //   };
+
     const sendMessage = async () => {
-        const protoMessage = ChatMessage.create({
-            timestamp: Date.now(),
+      if (!push || inputMessage.length === 0) return;
+
+      const timestamp = Date.now();
+      const protoMessage = ChatMessage.create({
+        timestamp: timestamp,
+        sender: address,
+        recipient: "lender address",
+        message: inputMessage,
+      });
+
+      const payload = ChatMessage.encode(protoMessage).finish();
+      const { recipients, errors } = await push({ payload, timestamp });
+
+      if (errors.length === 0) {
+        setInputMessage("");
+
+        // Update the messages state with the sent message
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            timestamp,
             sender: address,
-            recipient: 'lender address',
+            recipient: "lender address",
             message: inputMessage,
-        });
+          },
+        ]);
 
-        const serialisedMessage = ChatMessage.encode(protoMessage).finish();
+        console.log("MESSAGE PUSHED");
+      } else {
+        console.log(errors);
+      }
+    };
 
-        // Rest of the code to send the message
-    }
 
     return (
-        <>
-            <div className="chat-interface">
-                <h1>Waku React Demo</h1>
-                <div className="chat-body">
-                    {messages.map((message, index) => {
-                        if (message.recipient === "current user's address") {
-                            return (
-                                <div key={index} className="chat-message">
-                                    <span>{new Date(message.timestamp).toUTCString()}</span>
-                                    <div className="message-text">{message.message}</div>
-                                </div>
-                            )
-                        }
-                    })}
-                </div>
-                <div className="chat-footer">
-                    <input
-                        type="text"
-                        id="message-input"
-                        value={inputMessage}
-                        onChange={handleInputChange}
-                        placeholder="Type your message..."
-                    />
-                    <button className="send-button" onClick={sendMessage}>Send</button>
-                </div>
-            </div>
-        </>
-    )
+      <>
+        <div className="chat-interface">
+          <div className="chat-body">
+            {messages.map((message, index) => (
+              <div key={index} className="chat-message">
+                <span>{new Date(message.timestamp).toUTCString()}</span>
+                <div className="message-text">{message.message}</div>
+              </div>
+            ))}
+          </div>
+          <div className="chat-footer">
+            <input
+              type="text"
+              id="message-input"
+              value={inputMessage}
+              onChange={handleInputChange}
+              placeholder="Type your message..."
+            />
+            <button className="send-button" onClick={sendMessage}>
+              Send
+            </button>
+          </div>
+        </div>
+      </>
+    );
 }
 
 export default Chat

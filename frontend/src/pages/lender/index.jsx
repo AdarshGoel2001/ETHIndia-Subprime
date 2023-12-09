@@ -10,6 +10,7 @@ const LenderHome = () => {
       duration: 12,
       genesisTime: Date.now(),
       emi: 100,
+      totalDue: 1100,
     },
     {
       id: 123,
@@ -19,6 +20,7 @@ const LenderHome = () => {
       duration: 12,
       genesisTime: Date.now(),
       emi: 100,
+      totalDue: 1100,
     },
     {
       id: 123,
@@ -28,10 +30,11 @@ const LenderHome = () => {
       duration: 12,
       genesisTime: Date.now(),
       emi: 100,
+      totalDue: 1100,
     },
   ];
   return (
-    <div>
+    <div className="pb-10">
       <LenderNav />
       <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] xs:text-[24px] font-bold text-white text-center pt-10">
         All Lenders Requests

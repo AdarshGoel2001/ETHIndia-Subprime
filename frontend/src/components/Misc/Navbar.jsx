@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../public/logo.png";
 import { MdMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -17,6 +17,22 @@ const Navbar = () => {
   const handleHome = () => {
     router.push("/");
   }
+
+  
+   useEffect(() => {
+     // Add and remove the 'overflow-hidden' class based on the navbar state
+     if (navbarOpen) {
+       document.body.classList.add("overflow-hidden");
+     } else {
+       document.body.classList.remove("overflow-hidden");
+     }
+
+     // Cleanup function to remove the class when the component unmounts or the state changes
+     return () => {
+       document.body.classList.remove("overflow-hidden");
+     };
+   }, [navbarOpen]);
+
   return (
     <>
       <div className="text-white flex items-center h-[10vh] justify-between px-10 md:px-6 mds:pl-0 xs:pr-4">
@@ -59,22 +75,31 @@ const Navbar = () => {
                 {(() => {
                   if (!connected) {
                     return (
-                      <button onClick={openConnectModal} type="button">
+                      <div
+                        onClick={openConnectModal}
+                        className="text-white border border-[#676767] hover:border-white cursor-pointer py-2 px-4 rounded-lg xs:hidden"
+                      >
                         Connect Wallet
-                      </button>
+                      </div>
                     );
                   }
                   if (chain.unsupported) {
                     return (
-                      <button onClick={openChainModal} type="button">
+                      <div
+                        onClick={openChainModal}
+                        className="text-white border border-[#676767] hover:border-white cursor-pointer py-2 px-4 rounded-lg xs:hidden"
+                      >
                         Wrong network
-                      </button>
+                      </div>
                     );
                   }
                   return (
-                    <button type="button">
-                        Open App
-                    </button>
+                    <div
+                      onClick={() => setModal(!modal)}
+                      className="text-white border border-[#676767] hover:border-white cursor-pointer py-2 px-4 rounded-lg xs:hidden"
+                    >
+                      Open App
+                    </div>
                   );
                 })()}
               </div>
@@ -108,7 +133,7 @@ const Navbar = () => {
         </div>
       </div>
       {navbarOpen && (
-        <div className="h-[90vh] flex items-start py-4">
+        <div className="h-[100vh] flex items-start py-4">
           <div
             onClick={() => setModal(!modal)}
             className="text-white mx-4 border w-full text-center border-[#676767] hover:border-white cursor-pointer py-1 px-3 rounded-lg"

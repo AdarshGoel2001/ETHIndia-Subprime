@@ -5,5 +5,6 @@ import BorrowerNav from "./Misc/BorrowerNav";
 import InterestedReqCard from "./Card/InterestedReqCard";
 import AllInvestorCard from "./Card/AllInvestorCard";
 import LenderNav from "./Misc/LenderNav";
+import PayDueCard from "./Card/PayDueCard";
 
-export { Navbar, Footer, Modal, BorrowerNav, InterestedReqCard, AllInvestorCard, LenderNav };
+export { Navbar, Footer, Modal, BorrowerNav, InterestedReqCard, AllInvestorCard, LenderNav, PayDueCard };
