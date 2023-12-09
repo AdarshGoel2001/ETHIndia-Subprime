@@ -9,8 +9,20 @@ const BorrowerNav = () => {
      const [navbarOpen, setNavbarOpen] = useState(false);
      const router = useRouter();
 
+     const handleHome = () => {
+        router.push('/')
+     }
+
+     const handleBorrow = () => {
+        router.push('/borrower')
+     }
+
      const handleNavigate = () => {
       router.push('/borrower/interested')
+     }
+
+     const handlePay = () => {
+      router.push('/borrower/pay')
      }
   return (
     <>
@@ -18,13 +30,28 @@ const BorrowerNav = () => {
         <Image
           src={logo}
           alt="SubPrime"
-          className="h-28 w-40 md:h-24 md:w-36 mds:h-20 mds:w-28"
+          onClick={handleHome}
+          className="h-28 cursor-pointer w-40 md:h-24 md:w-36 mds:h-20 mds:w-28"
         />
-        <div
-          onClick={handleNavigate}
-          className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
-        >
-          Interested Topics
+        <div className="flex space-x-4 items-center">
+          <div
+            onClick={handleBorrow}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            All Investors
+          </div>
+          <div
+            onClick={handleNavigate}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            Interested Topics
+          </div>
+          <div
+            onClick={handlePay}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            Due Pays
+          </div>
         </div>
         <div className="hidden xs:block">
           {navbarOpen ? (
@@ -49,10 +76,22 @@ const BorrowerNav = () => {
       {navbarOpen && (
         <div className="h-[90vh] flex items-start py-4">
           <div
-            onClick={handleNavigate}
-            className="text-white mx-4 w-full text-center cursor-pointer py-1 px-3 rounded-lg"
+            onClick={handleBorrow}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
           >
-            Interested Request
+            All Investors
+          </div>
+          <div
+            onClick={handleNavigate}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            Interested Topics
+          </div>
+          <div
+            onClick={handlePay}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            Due Pays
           </div>
         </div>
       )}

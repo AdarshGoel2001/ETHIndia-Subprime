@@ -1,6 +1,6 @@
-import { AllInvestorCard, BorrowerNav, LenderNav } from "@/components";
+import { AllInvestorCard, LenderNav } from "@/components";
 
-const LenderHome = () => {
+const MyRequests = () => {
   const data = [
     {
       id: 123,
@@ -34,7 +34,7 @@ const LenderHome = () => {
     <div>
       <LenderNav />
       <div className="text-[48px] md:text-[40px] mds:text-[32px] sm:text-[28px] xs:text-[24px] font-bold text-white text-center pt-10">
-        All Lenders Requests
+        My Requests
       </div>
       <div className="mt-10 px-10 sm:px-4 space-y-4">
         {data.map((item, key) => (
@@ -47,4 +47,4 @@ const LenderHome = () => {
   );
 };
 
-export default LenderHome;
+export default MyRequests;
