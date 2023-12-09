@@ -7,7 +7,7 @@ const InvestorDetailCard = ({ item }) => {
 
   return showChat ? (
     <div>
-      <Chat />
+      <Chat setShowChat={setShowChat} />
     </div>
   ) : (
     <div className="rounded-lg px-6 mxs:px-3 xs:py-3 bg-[#000]/40 py-4 ">
