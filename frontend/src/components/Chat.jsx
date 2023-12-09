@@ -26,71 +26,49 @@ function Chat() {
 
     const { push } = useLightPush({ node, encoder });
 
+const ChatMessage = new protobuf.Type("ChatMessage")
+  .add(new protobuf.Field("timestamp", 1, "uint64"))
+  .add(new protobuf.Field("sender", 2, "string"))
+  .add(new protobuf.Field("recipient", 3, "string"))
+  .add(new protobuf.Field("message", 4, "string"))
+  .add(new protobuf.Field("senderPublicKey", 5, "string"))
+  .add(new protobuf.Field("recipientPublicKey", 6, "string"));
 
-   const ChatMessage = new protobuf.Type("ChatMessage")
-     .add(new protobuf.Field("timestamp", 1, "uint64"))
-     .add(new protobuf.Field("sender", 2, "string"))
-     .add(new protobuf.Field("recipient", 3, "string"))
-     .add(new protobuf.Field("message", 4, "string"));
+ const sendMessage = async () => {
+   if (!push || inputMessage.length === 0 || !recipientPublicKey) return;
 
-    //   const sendMessage = async () => {
-    //     if (!push || inputMessage.length === 0) return;
+   const timestamp = Date.now();
+   const protoMessage = ChatMessage.create({
+     timestamp,
+     sender: address,
+     recipient: "lender address",
+     message: inputMessage,
+     senderPublicKey: "your_sender_public_key", // Replace with the actual sender's public key
+     recipientPublicKey,
+   });
 
-    //     // Create a new message object
-    //     const timestamp = Date.now();
-    //     const protoMessage = ChatMessage.create({
-    //       timestamp: timestamp,
-    //       sender: address,
-    //       recipient: "lender address",
-    //       message: inputMessage,
-    //     });
+   const payload = ChatMessage.encode(protoMessage).finish();
+   const { recipients, errors } = await push({ payload, timestamp });
 
-    //     // Serialise the message and push to the network
-    //     const payload = ChatMessage.encode(protoMessage).finish();
-    //     const { recipients, errors } = await push({ payload, timestamp });
+   if (errors.length === 0) {
+     setInputMessage("");
+     setMessages((prevMessages) => [
+       ...prevMessages,
+       {
+         timestamp,
+         sender: address,
+         recipient: "lender address",
+         message: inputMessage,
+         senderPublicKey: "your_sender_public_key",
+         recipientPublicKey,
+       },
+     ]);
+     console.log("MESSAGE PUSHED");
+   } else {
+     console.log(errors);
+   }
+ };
 
-    //     // Check for errors
-    //     if (errors.length === 0) {
-    //       setInputMessage("");
-    //       console.log("MESSAGE PUSHED");
-    //     } else {
-    //       console.log(errors);
-    //     }
-    //   };
-
-    const sendMessage = async () => {
-      if (!push || inputMessage.length === 0) return;
-
-      const timestamp = Date.now();
-      const protoMessage = ChatMessage.create({
-        timestamp: timestamp,
-        sender: address,
-        recipient: "lender address",
-        message: inputMessage,
-      });
-
-      const payload = ChatMessage.encode(protoMessage).finish();
-      const { recipients, errors } = await push({ payload, timestamp });
-
-      if (errors.length === 0) {
-        setInputMessage("");
-
-        // Update the messages state with the sent message
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
-            timestamp,
-            sender: address,
-            recipient: "lender address",
-            message: inputMessage,
-          },
-        ]);
-
-        console.log("MESSAGE PUSHED");
-      } else {
-        console.log(errors);
-      }
-    };
 
 
     return (
