@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./Vault.sol";
 
-contract router {
+contract Router {
     address private owner;
     Vault vault;
 
