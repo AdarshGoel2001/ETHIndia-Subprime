@@ -1,7 +1,35 @@
 import { AllInvestorCard, LenderNav } from "@/components";
 import InterestedRes from "@/components/Card/InterestedPeople";
+const {auth, resolver, protocol} = require('@iden3/js-iden3-auth')
 
 const InterestedPeople = () => {
+  const createQuery = (e) => {
+    const age = e.age;
+    const salary = e.salary;
+    const credit = e.credit;
+    const proofRequest: protocol.ZKPRequest = {
+      id: 1,
+      circuitId: "credentialAtomicQuerySigV2",
+      query: {
+        allowedIssuers: ["*"],
+        type: "custom",
+        context: "ipfs://QmXvKFKRf2ryQvYZMhNDBDJqnFVDqhFWVsYU7phM8BpjBP",
+        credentialSubject: {
+          creditScore: {
+            $gt: credit,
+          },
+          age: {
+            $gt: age,
+          },
+          minSal: {
+            $gt: salary,
+          },
+        },
+      },
+    };
+    request.body.scope = [...scope, proofRequest];
+  };
+  
   const data = [
     {
       id: 123,
