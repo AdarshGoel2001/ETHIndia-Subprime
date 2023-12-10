@@ -8,7 +8,7 @@ export class PolygonIdController implements OnModuleInit {
   private issuerIdentifier: any;
 
   constructor(private readonly polygonIdService: PolygonIdService) {
-    this.polygonIdServiceURL = 'https://be31-14-195-9-98.ngrok-free.app';
+    this.polygonIdServiceURL = 'https://a4a8-14-195-9-98.ngrok-free.app';
   }
 
   async onModuleInit() {

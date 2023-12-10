@@ -1,30 +1,30 @@
-const { ethers } = require('hardhat');
+const { ethers } = require("hardhat");
 
 async function main() {
-    const Vault = await ethers.getContractFactory('Vault');
-    const vault = await Vault.deploy();
+  const Vault = await ethers.getContractFactory("Vault");
+  const vault = await Vault.deploy();
 
-    await vault.waitForDeployment();
-    await vault.deploymentTransaction().wait(3);
+  await vault.waitForDeployment();
+  await vault.deploymentTransaction().wait(3);
 
-    console.log('Vault deployed to:', await vault.getAddress());
+  console.log("Vault deployed to:", await vault.getAddress());
 
-    const Router = await ethers.getContractFactory('Router');
-    const router = await Router.deploy(await vault.getAddress());
+  const Router = await ethers.getContractFactory("router");
+  const router = await Router.deploy(await vault.getAddress());
 
-    await router.waitForDeployment();
-    await router.deploymentTransaction().wait(3);
+  await router.waitForDeployment();
+  await router.deploymentTransaction().wait(3);
 
-    await vault.setRouter(await router.getAddress());
+  await vault.setRouter(await router.getAddress());
 
-    console.log('Router deployed to:', await router.getAddress());
+  console.log("Router deployed to:", await router.getAddress());
 
-    console.log('--------------------------------------------');
+  console.log("--------------------------------------------");
 }
 
 main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-        console.error(error);
-        process.exit(1);
-    });
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

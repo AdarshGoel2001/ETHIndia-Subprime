@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import logo from "../../../public/logo.png";
 import axios from "axios";
+import { useAccount } from "wagmi";
 
 const Kyc = () => {
   const route = useRouter();
+  const { address, isConnected } = useAccount();
   const [formData, setFormData] = useState({
     name: "",
     age: null,
@@ -16,6 +18,7 @@ const Kyc = () => {
     phone: null,
     creditScore: null,
     id: "",
+    userAddress: address,
   });
 
   const [jsonData, setJsonData] = useState(null);
@@ -40,6 +43,7 @@ const Kyc = () => {
         creditScore: formData.credit,
         age: formData.age,
         minSal: formData.salary,
+        userAddress: formData.userAddress,
       };
 
       const response = await axios.post(
@@ -50,7 +54,8 @@ const Kyc = () => {
         "http://localhost:3333/lighthouse/uploadToLigthhouse",
         data2
       );
-      console.log(response.data);
+
+      console.log(response2);
 
       setJsonData(response.data);
       setJsonData2(response2.data);
@@ -272,7 +277,7 @@ const Kyc = () => {
           <div className="space-y-2">
             <div className="text-white">CID No :</div>
             <div className="text-white py-2 px-6 border border-[#787878] rounded-lg  ">
-              ABCDEFGHIJ
+              {jsonData2}
             </div>
           </div>
         </div>
