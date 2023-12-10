@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { LighthouseModule } from './lighthouse/lighthouse.module';
+import { PolygonIdModule } from './polygon-id/polygon-id.module';
 
 @Module({
-
-  imports: [LighthouseModule]
+  imports: [PolygonIdModule],
 })
 export class AppModule {}
