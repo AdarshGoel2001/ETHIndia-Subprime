@@ -1,6 +1,8 @@
 import { Footer, Navbar } from "@/components";
 import Lottie from "lottie-react";
 import animationData from '../../public/card.json'
+import an1 from '../../public/an1.json'
+import an2 from '../../public/an2.json'
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -41,7 +43,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="md:flex justify-center items-center px-20 lgm:px-14 md:px-10 mds:px-8 sm:px-4 xs:px-4">
+      <div className="flex justify-center items-center px-20 lgm:px-14 md:px-10 mds:px-8 sm:px-4 xs:px-4">
         <div className=" p-8 md:p-6 sm:p-4 xs:p-4 rounded-xl bg-black/40  w-1/2 md:w-[70%] mds:w-[80%] sm:w-full  border">
           <div className="text-[40px] md:text-[32px] mds:text-[26px] sm:text-[20px] font-bold text-white">
             Unleashing Financial Freedom
@@ -61,8 +63,15 @@ export default function Home() {
             distinctio perspiciatis. Consectetur.
           </div>
         </div>
+
+        <div className="w-[50%] md:hidden justify-center items-center flex mds:hidden z-10">
+          <Lottie animationData={an2} loop={true} />
+        </div>
       </div>
       <div className="flex my-10 justify-end  md:justify-center items-center px-20 lgm:px-14 md:px-10 mds:px-8 sm:px-4 xs:px-4">
+        <div className="w-[50%] md:hidden justify-center items-center flex mds:hidden z-10">
+          <Lottie animationData={an1} loop={true} />
+        </div>
         <div className="p-8 md:p-6 sm:p-4 xs:p-4 rounded-xl bg-black/40  w-1/2 md:w-[70%] mds:w-[80%] sm:w-full  border">
           <div className="text-[40px] md:text-[32px] mds:text-[26px] sm:text-[20px] font-bold text-white">
             Unleashing Financial Freedom
