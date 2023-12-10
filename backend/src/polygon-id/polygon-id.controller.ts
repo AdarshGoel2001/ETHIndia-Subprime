@@ -43,13 +43,20 @@ export class PolygonIdController implements OnModuleInit {
         this.issuerIdentifier,
         this.polygonIdServiceURL,
         body.id,
-        body.creditScore,
-        body.age,
-        body.minSal,
+        Number(body.creditScore),
+        Number(body.age),
+        Number(body.minSal),
       );
 
       console.log('Claim ID: ', id);
-
+      console.log(
+        this.polygonIdServiceURL +
+          '/v1/' +
+          this.issuerIdentifier +
+          '/claims/' +
+          id +
+          '/qrcode',
+      );
       const qrCodeData = await axios.get(
         this.polygonIdServiceURL +
           '/v1/' +

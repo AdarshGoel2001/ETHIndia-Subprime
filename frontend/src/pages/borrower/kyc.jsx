@@ -8,13 +8,13 @@ const Kyc = () => {
   const route = useRouter();
   const [formData, setFormData] = useState({
     name: "",
-    age: "",
-    minSal: "",
-    aadhar: "",
-    pan: "",
+    age: null,
+    minSal: null,
+    aadhar: null,
+    pan: null,
     address: "",
-    phone: "",
-    creditScore: "",
+    phone: null,
+    creditScore: null,
     id: "",
   });
 
@@ -43,13 +43,14 @@ const Kyc = () => {
       };
 
       const response = await axios.post(
-        "https://0c4d-2409-408c-be88-eec0-3018-18b6-35c2-d2c1.ngrok-free.app/polygon-id/verifyKYC",
+        "http://localhost:3333/polygon-id/verifyKYC",
         data
       );
       const response2 = await axios.post(
-        "https://0c4d-2409-408c-be88-eec0-3018-18b6-35c2-d2c1.ngrok-free.app/lighthouse/uploadToLigthhouse",
+        "http://localhost:3333/lighthouse/uploadToLigthhouse",
         data2
       );
+      console.log(response.data);
 
       setJsonData(response.data);
       setJsonData2(response2.data);
@@ -75,13 +76,13 @@ const Kyc = () => {
   const handleMinSalChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      minSal: e.target.value,
+      minSal: Number(e.target.value),
     }));
   };
   const handleAgeChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      age: e.target.value,
+      age: Number(e.target.value),
     }));
   };
 
@@ -116,7 +117,7 @@ const Kyc = () => {
   const handleCreditChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      credit: e.target.value,
+      creditScore: Number(e.target.value),
     }));
   };
 
@@ -192,7 +193,7 @@ const Kyc = () => {
               type="text"
               name="Enter Pan No"
               value={formData.id}
-              onChange={handleIdChange}
+              onChange={handleIDChange}
               className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
             />
           </div>
@@ -238,7 +239,7 @@ const Kyc = () => {
             <input
               type="text"
               name="Enter Credit Details"
-              value={formData.credit}
+              value={formData.creditScore}
               onChange={handleCreditChange}
               className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
             />
