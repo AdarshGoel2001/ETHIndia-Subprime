@@ -9,13 +9,13 @@ const Kyc = () => {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
-    salary: "",
+    minSal: "",
     aadhar: "",
     pan: "",
     address: "",
     phone: "",
-    credit: "",
-    did: "",
+    creditScore: "",
+    id: "",
   });
 
   const [jsonData, setJsonData] = useState(null);
@@ -25,10 +25,10 @@ const Kyc = () => {
   const doKyc = async () => {
     try {
       const data = {
-        id: formData.did,
-        creditScore: formData.credit,
+        id: formData.id,
+        creditScore: formData.creditScore,
         age: formData.age,
-        minSal: formData.salary,
+        minSal: formData.minSal,
       };
 
       const data2 = {
@@ -64,6 +64,24 @@ const Kyc = () => {
     setFormData((prevData) => ({
       ...prevData,
       name: e.target.value,
+    }));
+  };
+  const handleIDChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      id: e.target.value,
+    }));
+  };
+  const handleMinSalChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      minSal: e.target.value,
+    }));
+  };
+  const handleAgeChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      age: e.target.value,
     }));
   };
 
@@ -151,6 +169,42 @@ const Kyc = () => {
               name="Enter Pan No"
               value={formData.pan}
               onChange={handlePanChange}
+              className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="text-white block text-sm font-semibold mb-2">
+              Salary sir?
+            </label>
+            <input
+              type="text"
+              name="Enter mini sal No"
+              value={formData.minSal}
+              onChange={handleMinSalChange}
+              className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="text-white block text-sm font-semibold mb-2">
+              DID Number:
+            </label>
+            <input
+              type="text"
+              name="Enter Pan No"
+              value={formData.id}
+              onChange={handleIdChange}
+              className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="text-white block text-sm font-semibold mb-2">
+              Age:
+            </label>
+            <input
+              type="text"
+              name="Enter age No"
+              value={formData.age}
+              onChange={handleAgeChange}
               className="w-full px-4 py-2 border rounded-md border-[#676767] bg-transparent outline-none text-white"
             />
           </div>
