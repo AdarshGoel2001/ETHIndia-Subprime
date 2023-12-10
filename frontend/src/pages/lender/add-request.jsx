@@ -18,12 +18,18 @@ const AddRequests = () => {
 
   console.log(requests);
 
+  // const { error: borrowerToReqError, config: borrowerToReqConfig, status: borrowerToReqStatus } = usePrepareContractWrite({
+  //   address: ROUTER_ADDRESS,
+  //   abi: router.abi,
+  //   functionName: 'addBorrowerToRequest',
+  //   args: ['requestId', 'userAddress']
+  // })
+
   // const { error: requestError, config: requestConfig, status: requestConfigStatus } = usePrepareContractWrite({
   //   address: ROUTER_ADDRESS,
   //   abi: router.abi,
   //   functionName: 'buy',
-  //   args: [parseUnits(amount ? amount.toString() : "0", 18), interest, parseUnits(amount ? amount.toString() : "0", 18)],
-  //   value: purchaseCost ?? BigInt(0)
+  //   args: [parseUnits(amount ? amount.toString() : "0", 18), interest, ]
   // });
   // const { error: buyError, status: buyStatus, data: buyData, write: buy } = useContractWrite(buyConfig);
   // const { data: buyTxData, isError: buyTxError, isLoading: buyTxLoading } = useWaitForTransaction({ hash: buyData?.hash })
