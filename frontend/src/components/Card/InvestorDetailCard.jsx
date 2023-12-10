@@ -20,7 +20,7 @@ const InvestorDetailCard = ({ item }) => {
           <div className="flex gap-8 flex-wrap">
             <div>
               <div className="text-[#787878] text-[20px]">Amount</div>
-              <div className="text-white text-[16px]">${item.amount}</div>
+              <div className="text-white text-[16px]">{item.amount}</div>
             </div>
             <div>
               <div className="text-[#787878] text-[20px]">Interest</div>
