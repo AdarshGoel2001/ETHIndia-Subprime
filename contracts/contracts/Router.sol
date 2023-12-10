@@ -6,6 +6,7 @@ import "./Vault.sol";
 contract Router {
     address private owner;
     Vault vault;
+    mapping(address => string[]) private cids;
 
     constructor(address _vault) {
         vault = Vault(_vault);
@@ -19,6 +20,14 @@ contract Router {
 
     function setOwner(address _owner) public onlyOwner {
         owner = _owner;
+    }
+
+    function setCid(address _user, string memory _cid) external onlyOwner {
+        cids[_user].push(_cid);
+    }
+
+    function getCid(address _user) external view returns (string[] memory) {
+        return cids[_user];
     }
 
     function createRequest(
@@ -43,8 +52,8 @@ contract Router {
         vault.removeBorrowerFromRequest(msg.sender, id);
     }
 
-    function addBorrowerToRequest(uint256 id, address _borrower) external {
-        vault.addBorrowerToRequest(msg.sender, id, _borrower);
+    function addBorrowerToRequest(uint256 id, address _lender) external {
+        vault.addBorrowerToRequest(_lender, id, msg.sender);
     }
 
     function convertRequestToOffer(uint256 id) external {
