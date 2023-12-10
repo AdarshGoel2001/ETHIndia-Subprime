@@ -1,4 +1,5 @@
 import { AllInvestorCard, LenderNav } from "@/components";
+import InterestedRes from "@/components/Card/InterestedPeople";
 
 const InterestedPeople = () => {
   const data = [
@@ -42,7 +43,7 @@ const InterestedPeople = () => {
       <div className="mt-10 px-10 sm:px-4 space-y-4">
         {data.map((item, key) => (
           <div key={key}>
-            <AllInvestorCard item={item} />
+            <InterestedRes item={item} />
           </div>
         ))}
       </div>
