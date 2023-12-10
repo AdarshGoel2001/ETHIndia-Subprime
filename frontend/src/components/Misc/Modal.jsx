@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import { useRouter } from "next/router";
+import Lottie from "lottie-react";
+import lend from '../../../public/lend.json'
+import loan from '../../../public/loan.json'
 
 const Modal = ({ isOpen, onClose }) => {
   const modalRef = useRef(null);
@@ -45,7 +48,7 @@ const Modal = ({ isOpen, onClose }) => {
             option === "lender" && "bg-purple-950"
           }`}
         >
-          <Image src={logo} alt="SubPrime" className="w-40 h-28" />
+          <Lottie animationData={lend} loop={true} className="h-4/5" />
           <div className="text-white font-semibold text-[28px] mds:text-[24px] sm:text-[20px]">
             Lender
           </div>
@@ -56,7 +59,7 @@ const Modal = ({ isOpen, onClose }) => {
             option === "borrower" && "bg-purple-950"
           }`}
         >
-          <Image src={logo} alt="SubPrime" className="w-40 h-28" />
+          <Lottie animationData={loan} loop={true} className="h-4/5" />
           <div className="text-white font-semibold text-[28px] mds:text-[24px] sm:text-[20px]">
             Borrower
           </div>
