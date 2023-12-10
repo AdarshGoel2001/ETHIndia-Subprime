@@ -7,11 +7,14 @@ const Kyc = () => {
     const route = useRouter();
       const [formData, setFormData] = useState({
         name: "",
+        age: "",
+        salary: "",
         aadhar: "",
         pan: "",
         address: "",
         phone: "",
         credit: "",
+        did: ""
       });
 
       const handleInputChange = (e) => {

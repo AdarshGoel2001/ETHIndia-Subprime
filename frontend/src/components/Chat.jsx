@@ -31,38 +31,36 @@ function Chat({ setShowChat }) {
     .add(new protobuf.Field("recipient", 3, "string"))
     .add(new protobuf.Field("message", 4, "string"));
 
-  const sendMessage = async () => {
-    if (!push || inputMessage.length === 0) return;
+ const sendMessage = async () => {
+   if (!push || inputMessage.length === 0) return;
 
-    const timestamp = Date.now();
-    const protoMessage = ChatMessage.create({
-      timestamp: timestamp,
-      sender: address,
-      recipient: "lender address",
-      message: inputMessage,
-    });
-
-    const payload = ChatMessage.encode(protoMessage).finish();
-    const { recipients, errors } = await push({ payload, timestamp });
+   const timestamp = Date.now();
+   const protoMessage = ChatMessage.create({
+     timestamp,
+     sender: address,
+     recipient: "0x9D082e34b64532ADb8AF5594D61E9A6b1D7e55eF",
+     message: inputMessage,
+   });
 
     if (errors.length === 0) {
       setInputMessage("");
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          timestamp,
-          sender: address,
-          recipient: "lender address",
-          message: inputMessage,
-        },
-      ]);
-
-      console.log("MESSAGE PUSHED");
-    } else {
-      console.log(errors);
-    }
-  };
+   if (errors.length === 0) {
+     setInputMessage("");
+     setMessages((prevMessages) => [
+       ...prevMessages,
+       {
+         timestamp,
+         sender: address,
+         recipient: "0x9D082e34b64532ADb8AF5594D61E9A6b1D7e55eF",
+         message: inputMessage,
+       },
+     ]);
+     console.log("MESSAGE PUSHED");
+   } else {
+     console.log(errors);
+   }
+ };
 
   const formatHour = (timestamp) => {
     const date = new Date(timestamp);

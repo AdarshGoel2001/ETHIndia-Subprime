@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { sepolia } from 'wagmi/chains';
+import { arbitrumGoerli, localhost } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { getDefaultWallets, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { publicProvider } from "wagmi/providers/public";
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import { LightNodeProvider } from "@waku/react";
 import {
   injectedWallet,
@@ -28,8 +29,8 @@ const MyApp = ({ Component, pageProps }) => {
   const NODE_OPTIONS = { defaultBootstrap: true };
 
   const { chains, publicClient } = configureChains(
-    [sepolia],
-    [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? '' })]
+    [arbitrumGoerli],
+    [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? '' })],
   );
 
   const connectors = connectorsForWallets([
