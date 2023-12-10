@@ -1,34 +1,57 @@
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react'
-import logo from '../../../public/logo.png'
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import logo from "../../../public/logo.png";
 
 const Kyc = () => {
-    const route = useRouter();
-      const [formData, setFormData] = useState({
-        name: "",
-        age: "",
-        salary: "",
-        aadhar: "",
-        pan: "",
-        address: "",
-        phone: "",
-        credit: "",
-        did: ""
-      });
+  const route = useRouter();
+  const [url, setUrl] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    salary: "",
+    aadhar: "",
+    pan: "",
+    address: "",
+    phone: "",
+    credit: "",
+    did: "",
+  });
 
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      };
+  const [jsonData, setJsonData] = useState("");
 
-      const handleSave = () => {
-        console.log("Form Data:", formData);
-        route.push("/borrower");
+  const doKyc = async () => {
+    try {
+      const data = {
+        id: formData.did,
+        creditScore: formData.credit,
+        age: formData.age,
+        minSal: formData.salary,
       };
+      const response = await axios.put("${url}/polygon-id/verifyKYC", data);
+
+      setJsonData(response.data);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    console.log("Form Data:", formData);
+    route.push("/borrower");
+  };
+
+  const encodedData = encodeURIComponent(JSON.stringify(jsonData));
 
   return (
     <div className="flex justify-center items-center md:flex-col py-10">
@@ -112,7 +135,7 @@ const Kyc = () => {
           </div>
           <div className="text-center">
             <button
-              onClick={handleSave}
+              onClick={doKyc}
               className="hover:bg-black/40 mt-2 text-white w-full py-2 rounded-md"
             >
               Save
@@ -121,9 +144,17 @@ const Kyc = () => {
         </div>
       </div>
       <div className="w-1/2 flex items-center justify-center flex-col">
-        <Image
+        {/* <Image
           src={logo}
           alt="loan"
+          className="w-[500px] h-[500px] sm:w-[400px] sm:h-[400px] xs:w-[300px] xs:h-[300px]"
+        /> */}
+        <Image
+          src={`https://api.qrserver.com/v1/create-qr-code/?data=${encodedData}&amp;size=100x100`}
+          alt="l"
+          title="r"
+          width={2000}
+          height={2000}
           className="w-[500px] h-[500px] sm:w-[400px] sm:h-[400px] xs:w-[300px] xs:h-[300px]"
         />
         <div className="space-y-2">
@@ -135,6 +166,6 @@ const Kyc = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Kyc
+export default Kyc;
