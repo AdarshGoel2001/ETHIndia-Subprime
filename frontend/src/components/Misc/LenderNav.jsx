@@ -13,6 +13,10 @@ const LenderNav = () => {
     router.push("/");
   };
 
+  const handleInter = () => {
+    router.push("/lender/interested-people");
+  }
+
   const handleAll = () => {
     router.push("/lender");
   }
@@ -62,6 +66,12 @@ const LenderNav = () => {
             My Requests
           </div>
           <div
+            onClick={handleInter}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            People Interested
+          </div>
+          <div
             onClick={handleCreate}
             className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
           >
@@ -101,6 +111,12 @@ const LenderNav = () => {
             className="text-white mx-4 w-full text-center cursor-pointer py-1 px-3 rounded-lg"
           >
             My Requests
+          </div>
+          <div
+            onClick={handleInter}
+            className="text-white cursor-pointer py-2 px-4 xs:hidden font-semibold tracking-widest"
+          >
+            People Interested
           </div>
           <div
             onClick={handleCreate}
