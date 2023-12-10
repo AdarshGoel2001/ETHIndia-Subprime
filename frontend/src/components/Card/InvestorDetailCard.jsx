@@ -12,8 +12,8 @@ const InvestorDetailCard = ({ item }) => {
   ) : (
     <div className="rounded-lg px-6 mxs:px-3 xs:py-3 bg-[#000]/40 py-4 ">
       <div className="flex space-x-2 items-center">
-        <div className="text-white text-[20px]">{item.name}</div>
-        <div className="text-[#787878]">#{item.id}</div>
+        <div className="text-white text-[20px]">{item?.name}</div>
+        <div className="text-[#787878]">#{item?.id}</div>
       </div>
       <div className="flex justify-between items-start">
         <div>
@@ -39,8 +39,8 @@ const InvestorDetailCard = ({ item }) => {
               <div className="text-white text-[16px]">{item.emi}</div>
             </div>
             <div>
-              <div className="text-[#787878] text-[20px]">Total Due</div>
-              <div className="text-white text-[16px]">{item.totalDue}</div>
+              <div className="text-[#787878] text-[20px]">Amount Repayed</div>
+              <div className="text-white text-[16px]">{item.amountRepaid}</div>
             </div>
           </div>
         </div>

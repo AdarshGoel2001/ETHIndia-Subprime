@@ -60,7 +60,8 @@ function Chat({ setShowChat }) {
    } else {
      console.log(errors);
    }
- };
+ }
+}
 
   const formatHour = (timestamp) => {
     const date = new Date(timestamp);
@@ -120,6 +121,7 @@ function Chat({ setShowChat }) {
       </div>
     </div>
   );
-}
+          }
+        
 
 export default Chat;
