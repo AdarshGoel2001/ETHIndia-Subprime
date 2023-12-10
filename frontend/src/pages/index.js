@@ -1,19 +1,19 @@
 import { Footer, Navbar } from "@/components";
 import Lottie from "lottie-react";
-import animationData from '../../public/card.json'
-import an1 from '../../public/an1.json'
-import an2 from '../../public/an2.json'
+import animationData from "../../public/card.json";
+import an1 from "../../public/an1.json";
+import an2 from "../../public/an2.json";
 import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
   const handleLender = () => {
     router.push("/lender");
-  };  
+  };
 
   const handleBorrower = () => {
-    router.push("/borrower");
-  }
+    router.push("/borrower/kyc");
+  };
   return (
     <div>
       <Navbar />

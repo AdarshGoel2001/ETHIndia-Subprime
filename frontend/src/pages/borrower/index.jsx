@@ -1,6 +1,5 @@
 import { BorrowerNav } from "@/components";
 import React, { useState } from "react";
-import Chat from "../../components/Chat";
 import { ROUTER_ADDRESS } from "@/config";
 import { useAccount, useContractRead, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from "wagmi";
 import { prepareWriteContract, writeContract, waitForTransaction } from '@wagmi/core'

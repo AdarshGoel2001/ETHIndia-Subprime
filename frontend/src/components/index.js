@@ -7,4 +7,13 @@ import AllInvestorCard from "./Card/AllInvestorCard";
 import LenderNav from "./Misc/LenderNav";
 import PayDueCard from "./Card/PayDueCard";
 
-export { Navbar, Footer, Modal, BorrowerNav, InterestedReqCard, AllInvestorCard, LenderNav, PayDueCard };
+export {
+  Navbar,
+  Footer,
+  Modal,
+  BorrowerNav,
+  InterestedReqCard,
+  AllInvestorCard,
+  LenderNav,
+  PayDueCard,
+};

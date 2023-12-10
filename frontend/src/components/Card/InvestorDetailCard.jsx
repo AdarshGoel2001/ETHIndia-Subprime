@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import Chat from "../Chat";
 
 const InvestorDetailCard = ({ item }) => {
   const [interested, setIntersted] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
   return showChat ? (
-    <div>
-      <Chat setShowChat={setShowChat} />
-    </div>
+    <div></div>
   ) : (
     <div className="rounded-lg px-6 mxs:px-3 xs:py-3 bg-[#000]/40 py-4 ">
       <div className="flex space-x-2 items-center">

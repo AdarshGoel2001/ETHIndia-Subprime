@@ -3,8 +3,8 @@ import Image from "next/image";
 import logo from "../../../public/logo.png";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react";
-import lend from '../../../public/lend.json'
-import loan from '../../../public/loan.json'
+import lend from "../../../public/lend.json";
+import loan from "../../../public/loan.json";
 
 const Modal = ({ isOpen, onClose }) => {
   const modalRef = useRef(null);
@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose }) => {
       route.push("/lender");
     } else {
       setOption("borrower");
-      route.push("/borrower");
+      route.push("/borrower/kyc");
     }
   };
 
